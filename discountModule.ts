@@ -28,7 +28,7 @@ class PercentageDiscount implements Discount {
         this.discount = discount;
     }
     applyDiscount(cart: Cart): void {
-        console.log("Applying percentage discount:", this.discount);
+        console.log(`Applying percentage discount: ${this.discount}%`);
         cart.total = cart.total * (1 - this.discount / 100);
         console.log("Total after percentage discount:", cart.total);
     }
@@ -47,6 +47,7 @@ class PercentageDiscountByCategory implements Discount {
     }
     applyDiscount(cart: Cart): void {
         const initialCatergoryPrice = cart.items.filter(item => item.type === this.category).reduce((acc, item) => acc + item.price * item.quantity, 0);
+        console.log(`Applying percentage discount by category: ${this.discount}% for category: ${this.category}`);
         if (cart.couponDiscount) {
             if (cart.couponDiscount instanceof PercentageDiscount) {
                 const priceAfterPercentageDiscount = initialCatergoryPrice * (1 - cart.couponDiscount.discount / 100);
@@ -62,7 +63,6 @@ class PercentageDiscountByCategory implements Discount {
             console.log("Total after percentage discount by category:", cart.total);
         } else {
             const discount = initialCatergoryPrice * this.discount / 100;
-            console.log("Discount:", discount);
             cart.total -= discount;
             console.log("Total after percentage discount by category:", cart.total);
         }

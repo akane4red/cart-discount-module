@@ -101,7 +101,7 @@ function applyDiscounts(cart: Cart, discounts: any[]): void {
 };
 
 try {
-    handleUserInput("./input.json");
+    handleUserInput("./input/input.json");
 } catch (error) {
     console.error("Error handling user input:", error);
 }
